@@ -3,10 +3,8 @@ package jpabook.jpashop.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,5 +22,12 @@ public class Member {
 
     private Address address;
 
+    @OneToMany(mappedBy = "member")
+    // Order와 Member는 양방향 연관관계를 가진다. 따라서 연관관계의 주인을 정해야 한다.
+    // 연관관계의 주인은 외래키를 가지고 있는 Order 테이블이고, 연관관계의 주인이 아닌 Member 테이블에서
+    // mappedBy를 명시해줘야 한다. 다음에 오는 member는 Order 클래스 안에 있는 Member 클래스(테이블)의 객체를 가리킨다.
+
+
     private List<Order> orders = new ArrayList<>();
+
 }
